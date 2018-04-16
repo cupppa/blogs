@@ -1,0 +1,2 @@
+User-agent: *
+Sitemap: https://cupppa.github.io/sitemap.xml
