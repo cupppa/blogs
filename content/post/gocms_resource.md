@@ -70,6 +70,9 @@ List golang resources for cms build.
 - https://docs.ponzu-cms.org/CLI/General-Usage/
 - https://www.youtube.com/watch?v=T_1ncPoLgrg
 
+- https://github.com/sheng/air/
+- https://github.com/air-gases/
+
 ### Static Blog Engine
 
 - https://github.com/wendal/gor
