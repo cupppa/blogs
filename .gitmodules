@@ -4,5 +4,5 @@
 	branch = master
 [submodule "public"]
 	path = public
-	url = git@github.com:cupppa/cupppa.github.io.git
+	url = https://github.com/cupppa/cupppa.github.io.git
 	branch = master
