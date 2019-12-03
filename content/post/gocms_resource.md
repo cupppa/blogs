@@ -96,8 +96,6 @@ List golang resources for cms build.
 - http://learn.shayhowe.com/html-css/
 - http://www.w3cplus.com/preprocessor/Sass-3-3-new-feature-at-root-bem.html
 - http://www.w3cplus.com/preprocessor/use-ampersand-in-selector-name-with-Sass.html
-
 - https://www.bilibili.com/video/av5657763/index_1.html
-
 - http://watch-learn.com/series/theming-with-wp-rest-api
 
