@@ -12,11 +12,15 @@ draft: true
 - Windows
 ```
 scoop install hugo
+# or
+choco install hugo
 ```
+
 - Mac
 ```
 brew install hugo
 ```
+
 - Linux
 ```
 snap install hugo
