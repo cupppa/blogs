@@ -6,3 +6,6 @@
 	path = public
 	url = https://github.com/cupppa/cupppa.github.io.git
 	branch = master
+[submodule "themes/cupper"]
+	path = themes/cupper
+	url = https://github.com/zwbetz-gh/cupper-hugo-theme.git

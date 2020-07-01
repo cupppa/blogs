@@ -21,7 +21,7 @@ We are very familiar with running CLI processes in Docker containers with no Gra
 This article serves as transcript to <a href="https://www.youtube.com/watch?v=PKyj8sbZNYw&source=post_page">our hands-on demo</a> and as a quick refresher on how to run these kind of applications on a Mac in 5 minutes or less. For a more in depth look on how to build and run Linux GUI apps on Mac I highly recommend <a href="http://blog.alexellis.io/linux-deskto    p-on-mac/?source=post_page">the full from scratch rundown</a>, by fellow Docker Captain Alex Ellis.
 </p>
 <p>
-本文是<a href="https://www.youtube.com/watch?v=PKyj8sbZNYw&source=post_page">动手实践演示</a>的文字记录，快速复习了如何在5分钟或更短时间内在Mac上运行这类应用程序。要想更深入了解如何在Mac上构建和运行Linux GUI应用程序，我强列推荐Docker领队Alex Ellis的<a href="http://blog.alexellis.io/linux-desktop-on-mac/?source=post_page">从头开始的完整清单</a>。
+本文是<a href="https://www.youtube.com/watch?v=PKyj8sbZNYw&source=post_page">动手实践演示</a>的文字记录，快速复习了如何在5分钟或更短时间内在Mac上运行这类应用程序。要想更深入了解如何在Mac上构建和运行Linux GUI应用程序，我强列推荐Docker领队Alex Ellis的<a href="http://blog.alexellis.io/linux-desktop-on-mac/?source=post_page">从零开始的要点</a>。
 </p>
 
 <!--more-->

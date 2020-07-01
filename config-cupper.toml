@@ -69,7 +69,7 @@ copyright = "cupppa"            # default: author.name ↓        # 默认为下
   dateFormat = "2006-01-02 15:04"
   codePenUser = ""
   katex = true
-  darkThemeAsDefault = true
+  darkThemeAsDefault = false
   search = true
   # A list of custom css files can be provided, which must be placed inside 'static/'.
   # This is useful to override just specific css classes, instead of copying the entire

@@ -2,7 +2,7 @@
 title: "Upgrade Ruby for MAC OSX"
 date: 2018-04-14T10:32:40+08:00
 lastmod: 2018-04-14T10:32:40+08:00
-draft: false
+draft: true
 keywords: ["ruby", "mac"]
 description: ""
 tags: ["ruby", "mac"]

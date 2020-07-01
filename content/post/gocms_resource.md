@@ -8,7 +8,7 @@ author: "cupppa"
 #thumb: "@media/golang.png"
 tags: ["golang","cms"]
 categories: ["golang","cms","development"]
-draft: false
+draft: true
 
 # You can also close(false) or open(true) something for this content.
 # P.S. comment can only be closed
