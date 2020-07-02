@@ -1,3 +1,5 @@
-archetypes
-resources
-static
+# IDEs
+
+# hugo
+resources/
+public/
