@@ -5,8 +5,9 @@ lastmod: 2020-06-29T15:55:22+08:00
 draft: false
 keywords: [qrcode, wifi, python]
 description: ""
+summary: "Generate a qrcode for home wifi with pythonn wifi-qrcode-generator."
 tags: ["qrcode", "wifi", "python"]
-categories: ["qrcode","wifi","python"]
+categories: ["network"]
 author: "cupppa@gmail.com"
 
 # You can also close(false) or open(true) something for this content.

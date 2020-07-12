@@ -3,8 +3,8 @@ title: "Running GUI's with Docker on Mac OS X"
 slug: "running-guis-with-docker-on-mac-os-x"
 date: 2019-07-24T11:45:30+08:00
 author: "cupppa"
-tags: [ "mac", "docker", "chrome", "OS X", "Mac OS X" ]
-categories: [ "docker", "mac", "chrome", "OS X", "Mac OS X" ]
+tags: [ "docker", "gui" ]
+categories: [ "virtualize", "mac" ]
 draft: false
 ---
 
@@ -17,14 +17,14 @@ We are very familiar with running CLI processes in Docker containers with no Gra
 在Docker容器中运行无图形用户界面的命令行进程我们已很熟练。但你是否知道也可以在OSX系统中使用Docker运行有图形用户界面的应用程序，如Chrome, Firefox, Tor Browser, Gimp等等。
 </p>
 
+<!--more-->
+
 <p>
 This article serves as transcript to <a href="https://www.youtube.com/watch?v=PKyj8sbZNYw&source=post_page">our hands-on demo</a> and as a quick refresher on how to run these kind of applications on a Mac in 5 minutes or less. For a more in depth look on how to build and run Linux GUI apps on Mac I highly recommend <a href="http://blog.alexellis.io/linux-deskto    p-on-mac/?source=post_page">the full from scratch rundown</a>, by fellow Docker Captain Alex Ellis.
 </p>
 <p>
 本文是<a href="https://www.youtube.com/watch?v=PKyj8sbZNYw&source=post_page">动手实践演示</a>的文字记录，快速复习了如何在5分钟或更短时间内在Mac上运行这类应用程序。要想更深入了解如何在Mac上构建和运行Linux GUI应用程序，我强列推荐Docker领队Alex Ellis的<a href="http://blog.alexellis.io/linux-desktop-on-mac/?source=post_page">从零开始的要点</a>。
 </p>
-
-<!--more-->
 
 <p>
 The first thing we need is socat, a unix tool that creates two bidirectional streams between two endpoints. Our end goal is to create a connection between the docker container that runs a graphical application and the X window system on our OS X host operating system. So lets begin by creating a bridge between a network socket with a TCP listener on port 6000 (the default port of the X window system) and the X window server on my OS X host, that we’ll install and run in the next step on a unix socket.

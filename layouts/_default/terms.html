@@ -1,0 +1,101 @@
+{{- define "main" -}}
+
+{{ partial "page_header.html" . }}
+
+<div class="universal-wrapper">
+  {{ with .Content }}
+  <div class="article-style">{{ . }}</div>
+  {{ end }}
+
+  {{ if eq .Type "tags" }}
+
+    {{ $st := . }}
+    {{ $tags := .Data.Pages }}
+    {{ $count := len $tags }}
+
+    {{ $fontSmall := $st.Params.design.font_size_min | default 0.8 }}
+    {{ $fontBig := $st.Params.design.font_size_max | default 2.5 }}
+
+    <div class="card-simple">
+
+      {{ if ne $count 0 }}
+    
+        {{ $fontDelta := sub $fontBig $fontSmall }}
+        {{/* Warning: Hugo's `Reverse` function appears to operate in-place, hence the order of performing $max/$min matters. */}}
+        {{ $max := add (len (index $tags 0).Pages) 1 }}
+        {{ $min := len (index ($tags).Reverse 0).Pages }}
+        {{ $delta := sub $max $min }}
+        {{ $fontStep := div $fontDelta $delta }}
+    
+        <div class="tag-cloud">
+          {{ range $name, $term := (sort $tags ".Page.Title" "asc") }}
+            {{ $tagCount := len $term.Pages }}
+            {{ $weight := div (sub (math.Log $tagCount) (math.Log $min)) (sub (math.Log $max) (math.Log $min)) }}
+            {{ $fontSize := add $fontSmall (mul (sub $fontBig $fontSmall) $weight) }}
+            <a href="{{ .Page.RelPermalink }}" style="font-size:{{ $fontSize }}rem">{{ .Page.Title }}</a>
+          {{ end }}
+        </div>
+      {{ end }}
+    
+    </div>
+
+  {{ else if eq .Type "categories" }}
+
+    {{ $view := .Params.design.view }}
+
+    {{ range .Data.Pages }}
+      {{ $link := .RelPermalink }}
+      {{ $target := "" }}
+      {{ with .Params.external_link }}
+        {{ $link = . }}
+        {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+      {{ end }}
+
+      {{ $st := . }}
+      {{ $count := len $st.Pages }}
+
+      {{ $view = $st.Params.design.view | default $view }}
+
+      {{ $items_count := $st.Params.content.count }}
+      {{ if eq $items_count 0 }}
+        {{ $items_count = 65535 }}
+      {{ else }}
+        {{ $items_count = $items_count | default 5 }}
+      {{ end }}
+
+      <div class="card-simple">
+
+        <div class="row">
+          <div class="col-12 col-lg-4">
+            <h2>
+              <a href="{{$link}}" {{ $target | safeHTMLAttr }}>
+                <i class="fas fa-folder mr-1"></i>
+                {{ .Title }}
+                [<span class="">{{ if ge $count $items_count }}{{ $items_count }}/{{ end }}{{ $count }}</span>]</a>
+            </h2>
+            {{ with $st.Content }}{{ . }}{{ end }}
+          </div>
+          <div class="col-12 col-lg-8">
+
+            {{ range first $items_count .Pages }}
+              {{ if eq $view 1 }}
+                {{ partial "li_list" . }}
+              {{ else if eq $view 3 }}
+                {{ partial "li_card" . }}
+              {{ else }}
+                {{ partial "li_compact" . }}
+              {{ end }}
+            {{end}}
+
+          </div>
+        </div>
+
+      </div>
+      
+    {{ end }}
+
+  {{ end }}
+
+</div>
+
+{{- end -}}

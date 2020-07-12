@@ -5,7 +5,7 @@ tags: ["hugo", "academic"]
 categories: ["blog"]
 date: 2020-07-01T23:07:31+08:00
 
-summary: "记录使用Hugo和Academic主题搭建博客系统的步骤。"
+summary: "Record opeation steps of building personal site with academic for hugo."
 
 draft: false
 ---
@@ -109,7 +109,7 @@ mkdir -p layouts/partials/widgets
 cp themes/academic/layouts/partials/widgets/pages.html layouts/partials/widgets/
 ```
 
-- refer to `theme/academic/layouts/partials/widgets/tag_cloud.html`, replace "Recent Post" partial (`<div class="col-12 col-lg-4 section-headeing">...</div>`) with below content and move it from left to right side on homepage:
+refer to `theme/academic/layouts/partials/widgets/tag_cloud.html`, replace "Recent Post" partial (`<div class="col-12 col-lg-4 section-headeing">...</div>`) with below content and move it from left to right side on homepage:
 
 ```
   <div class="col-12 col-lg-4 section-heading">
@@ -148,4 +148,188 @@ cp themes/academic/layouts/partials/widgets/pages.html layouts/partials/widgets/
     {{ end }}
 
   </div>
+```
+
+## Localize css/js/font
+
+Edit params.toml to change font to "native" 
+
+```
+sed -i 's/font = ""/font = "native"/' params.toml
+```
+
+Install [Academic Admin](https://github.com/sourcethemes/academic-admin) tool and import JS and CSS assets to static/
+
+```
+pip3 install academic
+academic import --assets
+```
+
+Add Font Awesome font assets to static/
+
+```
+wget https://github.com/FortAwesome/Font-Awesome/releases/download/5.12.0/fontawesome-free-5.12.0-web.zip -o ~/Downloads/
+unzip ~/Downloads/fontawesome-free-5.12.0-web.zip
+rsync -av fontawesome-free-5.12.0-web/webfonts static/css/
+```
+
+## Custom Axonomy term list page
+
+Refer to `themes/academic/layouts/partials/widgets/{tag_cloud,pages}.html`, add template `layouts/_default/terms.html`
+
+```
+cat >layouts/_default/terms.html <<EOF>
+{{- define "main" -}}
+
+{{ partial "page_header.html" . }}
+
+<div class="universal-wrapper">
+  {{ with .Content }}
+  <div class="article-style">{{ . }}</div>
+  {{ end }}
+
+  {{ if eq .Type "tags" }}
+
+    {{ $st := . }}
+    {{ $tags := .Data.Pages }}
+    {{ $count := len $tags }}
+
+    {{ $fontSmall := $st.Params.design.font_size_min | default 0.8 }}
+    {{ $fontBig := $st.Params.design.font_size_max | default 2.5 }}
+
+    <div class="card-simple">
+
+      {{ if ne $count 0 }}
+    
+        {{ $fontDelta := sub $fontBig $fontSmall }}
+        {{/* Warning: Hugo's `Reverse` function appears to operate in-place, hence the order of performing $max/$min matters. */}}
+        {{ $max := add (len (index $tags 0).Pages) 1 }}
+        {{ $min := len (index ($tags).Reverse 0).Pages }}
+        {{ $delta := sub $max $min }}
+        {{ $fontStep := div $fontDelta $delta }}
+    
+        <div class="tag-cloud">
+          {{ range $name, $term := (sort $tags ".Page.Title" "asc") }}
+            {{ $tagCount := len $term.Pages }}
+            {{ $weight := div (sub (math.Log $tagCount) (math.Log $min)) (sub (math.Log $max) (math.Log $min)) }}
+            {{ $fontSize := add $fontSmall (mul (sub $fontBig $fontSmall) $weight) }}
+            <a href="{{ .Page.RelPermalink }}" style="font-size:{{ $fontSize }}rem">{{ .Page.Title }}</a>
+          {{ end }}
+        </div>
+      {{ end }}
+    
+    </div>
+
+  {{ else if eq .Type "categories" }}
+
+    {{ $view := .Params.design.view }}
+
+    {{ range .Data.Pages }}
+      {{ $link := .RelPermalink }}
+      {{ $target := "" }}
+      {{ with .Params.external_link }}
+        {{ $link = . }}
+        {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+      {{ end }}
+
+      {{ $st := . }}
+      {{ $count := len $st.Pages }}
+
+      {{ $view = $st.Params.design.view | default $view }}
+
+      {{ $items_count := $st.Params.content.count }}
+      {{ if eq $items_count 0 }}
+        {{ $items_count = 65535 }}
+      {{ else }}
+        {{ $items_count = $items_count | default 5 }}
+      {{ end }}
+
+      <div class="card-simple">
+
+        <div class="row">
+          <div class="col-12 col-lg-4">
+            <h2>
+              <a href="{{$link}}" {{ $target | safeHTMLAttr }}>
+                <i class="fas fa-folder mr-1"></i>
+                {{ .Title }}
+                [<span class="">{{ if ge $count $items_count }}{{ $items_count }}/{{ end }}{{ $count }}</span>]</a>
+            </h2>
+            {{ with $st.Content }}{{ . }}{{ end }}
+          </div>
+          <div class="col-12 col-lg-8">
+
+            {{ range first $items_count .Pages }}
+              {{ if eq $view 1 }}
+                {{ partial "li_list" . }}
+              {{ else if eq $view 3 }}
+                {{ partial "li_card" . }}
+              {{ else }}
+                {{ partial "li_compact" . }}
+              {{ end }}
+            {{end}}
+
+          </div>
+        </div>
+
+      </div>
+      
+    {{ end }}
+
+  {{ end }}
+
+</div>
+
+{{- end -}}
+EOF
+```
+
+Add `content/{tags,categories}/_index.md` to appoint list style to `card`
+
+```
+cat >content/categories/_index.md <<EOF
++++
+title = "Categories"
+
+[design]
+  # 1: list
+  # 2: compact
+  # 3: card
+  view = 3
+```
+
+## Custom axonomy term page
+
+Refer to `themes/academic/_default/list.html` and `themes/academic/_default/partials/widgets/pages.html`, add template `layouts/_default/term.html`
+
+```
+cat >layouts/_default/term.html <<EOF
+{{- define "main" -}}
+
+{{ partial "page_header.html" . }}
+
+<div class="universal-wrapper">
+
+  {{ with .Content }}
+  <div class="article-style">{{ . }}</div>
+  {{ end }}
+
+  {{ $view := .Parent.Params.design.view }}
+
+  {{ $paginator := .Paginate .Data.Pages }}
+  {{ range $paginator.Pages }}
+    {{ if eq $view 1 }}
+      {{ partial "li_list" . }}
+    {{ else if eq $view 3 }}
+      {{ partial "li_card" . }}
+    {{ else }}
+      {{ partial "li_compact" . }}
+    {{ end }}
+  {{ end }}
+
+  {{ partial "pagination" . }}
+
+</div>
+
+{{- end -}}
+EOF
 ```

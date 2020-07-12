@@ -6,7 +6,7 @@ draft: true
 keywords: [ceph, cephfs, cluster, rbd, rgw, nfs]
 description: ""
 tags: ["ceph", "cluster", "rbd", "rgw", "nfs"]
-categories: ["ceph","cluster","storage"]
+categories: ["linux", "storage"]
 author: "cupppa@gmail.com"
 
 # You can also close(false) or open(true) something for this content.

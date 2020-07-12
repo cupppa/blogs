@@ -7,7 +7,7 @@ lastmod: "2018-04-14 16:32:10+08:00"
 author: "cupppa"
 #thumb: "@media/golang.png"
 tags: ["golang","cms"]
-categories: ["golang","cms","development"]
+categories: ["blog", "cms"]
 draft: true
 
 # You can also close(false) or open(true) something for this content.

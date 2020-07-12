@@ -5,8 +5,8 @@ lastmod: 2018-04-14T10:32:40+08:00
 draft: true
 keywords: ["ruby", "mac"]
 description: ""
-tags: ["ruby", "mac"]
-categories: [development]
+tags: ["ruby"]
+categories: ["mac"]
 author: ""
 
 # You can also close(false) or open(true) something for this content.

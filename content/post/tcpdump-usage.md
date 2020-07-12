@@ -5,8 +5,9 @@ lastmod: 2020-07-01T11:52:38+08:00
 draft: false
 keywords: [tcpdump]
 description: ""
+summary: "Some examples using tcpdump."
 tags: ["tcpdump"]
-categories: ["tcpdump"]
+categories: ["linux","network"]
 author: ""
 
 # You can also close(false) or open(true) something for this content.
