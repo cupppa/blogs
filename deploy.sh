@@ -23,6 +23,11 @@ hugo # if using a theme, replace with `hugo -t <YOURTHEME>`
 
 # Go To Public folder
 cd public
+
+# Config
+git config --replace-all user.name cupppa
+git config --replace-all user.email cupppa@gmail.com
+
 # Add changes to git.
 git add .
 
