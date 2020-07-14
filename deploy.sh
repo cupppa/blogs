@@ -39,3 +39,9 @@ git push origin master
 # Come Back up to the Project Root
 cd ..
 
+# Add public to git.
+git add public
+
+# Commit and push public.
+git commit -m "$msg"
+git push origin master
