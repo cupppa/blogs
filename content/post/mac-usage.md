@@ -3,7 +3,7 @@
 
 title: "Mac Usage"
 subtitle: ""
-summary: ""
+summary: "Some config to using mac."
 authors: []
 tags: ["bash","terminal"]
 categories: ["mac"]
@@ -27,8 +27,6 @@ image:
 #   Otherwise, set `projects = []`.
 projects: []
 ---
-
-Some config to using mac.
 
 ## Terminal colors
 ```

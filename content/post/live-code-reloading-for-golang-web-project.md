@@ -3,10 +3,10 @@
 
 title: "Live Code Reloading for Golang Web Project"
 subtitle: ""
-summary: ""
+summary: "Live code reloading for golang with Makefile and fswatch"
 authors: []
-tags: []
-categories: []
+tags: [ "golang", "web" ]
+categories: [ "mac" ]
 date: 2020-07-27T17:03:38+08:00
 lastmod: 2020-07-27T17:03:38+08:00
 featured: false
